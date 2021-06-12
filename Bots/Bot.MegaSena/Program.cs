@@ -29,12 +29,12 @@ namespace Bot.MegaSena
             foreach (var number in competitionResult.ListaDezenas)
             {
                 string processedNumber = number.Length > 2 ? number.Substring(1, 2) : number;
-                finalNumbers += string.Concat(processedNumber, " ");
+                finalNumbers += string.Concat(processedNumber, "-");
             }
 
             Console.WriteLine("-------------------------------------------------------------------");
-            Console.WriteLine(string.Format("Result Numbers: {0}", finalNumbers));
-            Console.WriteLine(string.Format("Number of Winners: {0}", competitionResult.listaRateioPremio.Sum(x=> x.NumeroDeGanhadores)));
+            Console.WriteLine(string.Format("Result Numbers: {0}", finalNumbers.Substring(0, finalNumbers.Length - 1)));
+            Console.WriteLine(string.Format("Number of Winners: {0}", competitionResult.listaRateioPremio.Sum(x => x.NumeroDeGanhadores)));
             Console.WriteLine(string.Format("Total prize value: {0}", competitionResult.listaRateioPremio.Sum(x => x.ValorPremio)));
 
             Console.ReadKey();
