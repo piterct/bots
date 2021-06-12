@@ -35,6 +35,7 @@ namespace Bot.MegaSena
             Console.WriteLine("-------------------------------------------------------------------");
             Console.WriteLine(string.Format("Result Numbers: {0}", finalNumbers));
             Console.WriteLine(string.Format("Number of Winners: {0}", competitionResult.listaRateioPremio.Sum(x=> x.NumeroDeGanhadores)));
+            Console.WriteLine(string.Format("Total prize value: {0}", competitionResult.listaRateioPremio.Sum(x => x.ValorPremio)));
 
             Console.ReadKey();
         }
