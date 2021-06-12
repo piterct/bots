@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 
 namespace Bot.MegaSena
@@ -32,7 +33,8 @@ namespace Bot.MegaSena
             }
 
             Console.WriteLine("-------------------------------------------------------------------");
-            Console.WriteLine(string.Format("Result: {0}", finalNumbers));
+            Console.WriteLine(string.Format("Result Numbers: {0}", finalNumbers));
+            Console.WriteLine(string.Format("Number of Winners: {0}", competitionResult.listaRateioPremio.Sum(x=> x.NumeroDeGanhadores)));
 
             Console.ReadKey();
         }
