@@ -6,7 +6,9 @@ namespace Bot.Instagram.Profile
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
+           Profile profile =  Instagram.GetProfileByUser("i.love.code");
+          
 
             Console.ReadKey();
         }
