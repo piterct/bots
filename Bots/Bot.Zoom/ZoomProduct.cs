@@ -39,11 +39,23 @@ namespace Bot.Zoom
                     product.urlProductWebSite = string.Format("{0}{1}", rooUrl, divProduct.Descendants("a").FirstOrDefault().ChildAttributes("href").FirstOrDefault().Value);
                     product.imageUrl = divProduct.Descendants("img").FirstOrDefault().ChildAttributes("src").FirstOrDefault().Value;
 
-                    var title = div.Descendants("img").FirstOrDefault().ChildAttributes("title").FirstOrDefault().Value;
+                    GetPriceProduct(divProduct, product);
+
                 }
             }
 
             return await Task.FromResult(product);
+        }
+
+        private static void GetPriceProduct(HtmlNode products, Product product)
+        {
+            var divCardInfo = products.Descendants("div")
+                   .Where(node => node.GetAttributeValue("class", "").Equals("cardInfo")).ToList();
+
+            foreach (var priceProduct in divCardInfo)
+            {
+                product.Price = priceProduct.Descendants("span").Where(node => node.GetAttributeValue("class", "").Equals("customValue")).FirstOrDefault().InnerText;
+            }
         }
     }
 }
