@@ -2,6 +2,10 @@
 {
     public class Profile
     {
+        public Profile(string userName)
+        {
+            UserName = userName;
+        }   
         public string UserName { get; set; }
         public string IosAppName { get; set; }
         public string IosAppId { get; set; }
