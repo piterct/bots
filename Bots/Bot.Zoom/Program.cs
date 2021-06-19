@@ -9,7 +9,7 @@ namespace Bot.Zoom
          static void Main(string[] args)
         {
 
-            List<Product> products =  ZoonmProduct.GetProduct("iphone").Result;
+            List<Product> products =  ZoonmProduct.GetProduct("playstation4").Result;
 
             products = products.OrderByDescending(x => x.Price).ToList();
 

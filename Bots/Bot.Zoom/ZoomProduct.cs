@@ -18,7 +18,7 @@ namespace Bot.Zoom
             string url = string.Format("{0}{1}", rooUrl, searchUrl);
             string markup;
             List<Product> products = new List<Product>();
-           
+
 
             using (WebClient client = new WebClient())
             {
@@ -28,7 +28,7 @@ namespace Bot.Zoom
             HtmlDocument html = new HtmlDocument();
             html.LoadHtml(markup);
 
-           
+
 
 
             var divs = html.DocumentNode.Descendants("div")
@@ -38,6 +38,10 @@ namespace Bot.Zoom
             {
                 var divProducts = div.Descendants("div")
                     .Where(node => node.GetAttributeValue("class", "").Equals("card card--prod")).ToList();
+
+                if (divProducts.Count == 0)
+                    divProducts = div.Descendants("div")
+                   .Where(node => node.GetAttributeValue("class", "").Equals("card card--offer card--cpc")).ToList();
 
                 foreach (var divProduct in divProducts)
                 {
@@ -53,7 +57,7 @@ namespace Bot.Zoom
                     products.Add(product);
                 }
 
-                
+
             }
 
             return await Task.FromResult(products);
@@ -68,7 +72,7 @@ namespace Bot.Zoom
             foreach (var priceProduct in divCardInfo)
             {
                 product.DescriptionPrice = priceProduct.Descendants("span").Where(node => node.GetAttributeValue("class", "").Equals("customValue"))?.FirstOrDefault()?.InnerText;
-                product.Price = Convert.ToDecimal(product.DescriptionPrice.Substring(uslessCoin.Length)) ;
+                product.Price = Convert.ToDecimal(product.DescriptionPrice.Substring(uslessCoin.Length));
             }
         }
     }
