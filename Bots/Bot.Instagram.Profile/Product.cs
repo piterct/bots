@@ -1,12 +1,12 @@
-﻿namespace Bot.Instagram.Profile
+﻿namespace Bot.Zoom
 {
-    public class Profile
+    public class Product
     {
-        public Profile(string userName)
+        public Product(string nameProduct)
         {
-            UserName = userName;
+            NameProduct = nameProduct;
         }   
-        public string UserName { get; set; }
+        public string NameProduct { get; set; }
         public string IosAppName { get; set; }
         public string IosAppId { get; set; }
         public string IosUrl { get; set; }

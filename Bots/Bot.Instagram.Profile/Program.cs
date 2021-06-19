@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace Bot.Instagram.Profile
+namespace Bot.Zoom
 {
     class Program
     {
-        static void Main(string[] args)
+         static void Main(string[] args)
         {
 
-           Profile profile =  Instagram.GetProfileByUser("i.love.code");
-          
+            Product product =  ZoonmProduct.GetProduct("iphone").Result;
+
 
             Console.ReadKey();
         }
