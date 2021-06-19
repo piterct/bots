@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Bot.Zoom
 {
@@ -7,8 +9,9 @@ namespace Bot.Zoom
          static void Main(string[] args)
         {
 
-            Product product =  ZoonmProduct.GetProduct("iphone").Result;
+            List<Product> products =  ZoonmProduct.GetProduct("iphone").Result;
 
+            products = products.OrderByDescending(x => x.Price).ToList();
 
             Console.ReadKey();
         }

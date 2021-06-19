@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,13 +11,14 @@ namespace Bot.Zoom
 {
     public static class ZoonmProduct
     {
-        public async static ValueTask<Product> GetProduct(string productName)
+        public async static ValueTask<List<Product>> GetProduct(string productName)
         {
-            var product = new Product(productName);
             string rooUrl = "https://www.zoom.com.br";
             string searchUrl = @"/search?q=" + productName + "";
             string url = string.Format("{0}{1}", rooUrl, searchUrl);
             string markup;
+            List<Product> products = new List<Product>();
+           
 
             using (WebClient client = new WebClient())
             {
@@ -25,6 +27,9 @@ namespace Bot.Zoom
 
             HtmlDocument html = new HtmlDocument();
             html.LoadHtml(markup);
+
+           
+
 
             var divs = html.DocumentNode.Descendants("div")
                 .Where(node => node.GetAttributeValue("class", "").Equals("SearchPage_SearchList__HL7RI col")).ToList();
@@ -36,26 +41,34 @@ namespace Bot.Zoom
 
                 foreach (var divProduct in divProducts)
                 {
+                    Product product = new Product();
+
+                    product.NameProduct = productName;
                     product.urlProductWebSite = string.Format("{0}{1}", rooUrl, divProduct.Descendants("a").FirstOrDefault().ChildAttributes("href").FirstOrDefault().Value);
                     product.Title = divProduct.Descendants("img").FirstOrDefault().ChildAttributes("title").FirstOrDefault().Value;
                     product.imageUrl = divProduct.Descendants("img").FirstOrDefault().ChildAttributes("src").FirstOrDefault().Value;
 
                     GetPriceProduct(divProduct, product);
 
+                    products.Add(product);
                 }
+
+                
             }
 
-            return await Task.FromResult(product);
+            return await Task.FromResult(products);
         }
 
         private static void GetPriceProduct(HtmlNode products, Product product)
         {
+            string uslessCoin = "R$";
             var divCardInfo = products.Descendants("div")
                    .Where(node => node.GetAttributeValue("class", "").Equals("cardInfo")).ToList();
 
             foreach (var priceProduct in divCardInfo)
             {
-                product.Price = priceProduct.Descendants("span").Where(node => node.GetAttributeValue("class", "").Equals("customValue")).FirstOrDefault().InnerText;
+                product.DescriptionPrice = priceProduct.Descendants("span").Where(node => node.GetAttributeValue("class", "").Equals("customValue"))?.FirstOrDefault()?.InnerText;
+                product.Price = Convert.ToDecimal(product.DescriptionPrice.Substring(uslessCoin.Length)) ;
             }
         }
     }
