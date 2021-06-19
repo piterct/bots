@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bot.MegaSena", "Bot.MegaSena\Bot.MegaSena.csproj", "{100C7EFE-3A36-4066-BD51-286D57312362}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bot.Zoom", "Bot.Instagram.Profile\Bot.Zoom.csproj", "{94001500-7199-44C5-97F9-F5A0BA99318F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bot.Zoom", "Bot.Zoom\Bot.Zoom.csproj", "{94001500-7199-44C5-97F9-F5A0BA99318F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

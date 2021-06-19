@@ -31,8 +31,6 @@ namespace Bot.Zoom
 
             foreach (var div in divs)
             {
-                // var divProducts = div.Descendants("div").ToList();
-
                 var divProducts = div.Descendants("div")
                     .Where(node => node.GetAttributeValue("class", "").Equals("card card--prod")).ToList();
 
