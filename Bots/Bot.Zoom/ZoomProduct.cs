@@ -47,7 +47,7 @@ namespace Bot.Zoom
                 {
                     Product product = new Product();
 
-                    product.NameProduct = productName;
+                    product.NameProductSearch = productName;
                     product.urlProductWebSite = string.Format("{0}{1}", rooUrl, divProduct.Descendants("a").FirstOrDefault().ChildAttributes("href").FirstOrDefault().Value);
                     product.Title = divProduct.Descendants("img").FirstOrDefault().ChildAttributes("title").FirstOrDefault().Value;
                     product.imageUrl = divProduct.Descendants("img").FirstOrDefault().ChildAttributes("src").FirstOrDefault().Value;
