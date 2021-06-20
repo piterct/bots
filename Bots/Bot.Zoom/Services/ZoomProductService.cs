@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Bot.Zoom.Services
 {
-    public static class ZoonmProduct
+    public static class ZoonmProductService
     {
         public async static ValueTask<List<Product>> GetProduct(string productName)
         {
