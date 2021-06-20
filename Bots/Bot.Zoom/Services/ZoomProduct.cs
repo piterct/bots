@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using Bot.Zoom.Models;
+using HtmlAgilityPack;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Bot.Zoom
+namespace Bot.Zoom.Services
 {
     public static class ZoonmProduct
     {

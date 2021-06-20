@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Bot.Zoom.Models;
+using Bot.Zoom.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,7 +10,7 @@ using System.Text.Json;
 
 namespace Bot.Zoom
 {
-    class Program
+    internal class Program
     {
         private static void Main(string[] args)
         {
@@ -29,6 +32,16 @@ namespace Bot.Zoom
             products = products.OrderByDescending(x => x.Price).ToList();
 
             Console.ReadKey();
+        }
+
+        public static IConfiguration LoadConfiguration()
+        {
+            var builder = new ConfigurationBuilder()
+              .SetBasePath(AppContext.BaseDirectory)
+              .AddJsonFile("appsettings.json");
+
+            return builder.Build();
+
         }
 
     }

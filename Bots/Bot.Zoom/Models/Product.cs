@@ -1,4 +1,4 @@
-﻿namespace Bot.Zoom
+﻿namespace Bot.Zoom.Models
 {
     public class Product
     {  
