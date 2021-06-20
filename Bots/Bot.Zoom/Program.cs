@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,15 @@ namespace Bot.Zoom
 {
     class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+            var builder = new HostBuilder()
+               .ConfigureServices((hostContext, services) =>
+               {
+                   // services.AddSingleton<IJobConfiguration, JobConfiguration>();
+
+               });
+
 
             Console.WriteLine("Name product to search: ");
             string nameProduct = Console.ReadLine();
@@ -22,5 +30,6 @@ namespace Bot.Zoom
 
             Console.ReadKey();
         }
+
     }
 }

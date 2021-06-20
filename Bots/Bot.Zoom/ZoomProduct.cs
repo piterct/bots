@@ -49,7 +49,7 @@ namespace Bot.Zoom
 
                     product.NameProductSearch = productName;
                     product.urlProductWebSite = string.Format("{0}{1}", rooUrl, divProduct.Descendants("a").FirstOrDefault().ChildAttributes("href").FirstOrDefault().Value);
-                    product.Title = divProduct.Descendants("img").FirstOrDefault().ChildAttributes("title").FirstOrDefault().Value;
+                    product.Title = divProduct.Descendants("img").FirstOrDefault().ChildAttributes("title").FirstOrDefault().Value.Replace("&quot;","'");
                     product.imageUrl = divProduct.Descendants("img").FirstOrDefault().ChildAttributes("src").FirstOrDefault().Value;
 
                     GetPriceProduct(divProduct, product);
