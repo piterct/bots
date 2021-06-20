@@ -1,5 +1,7 @@
-﻿using Bot.Zoom.Models;
+﻿using Bot.Zoom.Interfaces;
+using Bot.Zoom.Models;
 using Bot.Zoom.Services;
+using Bot.Zoom.Settings;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,7 +26,8 @@ namespace Bot.Zoom
                .ConfigureServices((hostContext, services) =>
                {
                    services.AddHostedService<Service>();
-                   // services.AddSingleton<IJobConfiguration, JobConfiguration>();
+                   services.AddSingleton(config);
+                   services.AddSingleton<IBotZoomSettings, BotZoomSettings>();
 
                });
 

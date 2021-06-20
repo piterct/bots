@@ -50,7 +50,7 @@ namespace Bot.Zoom.Services
 
                     product.NameProductSearch = productName;
                     product.urlProductWebSite = string.Format("{0}{1}", rooUrl, divProduct.Descendants("a").FirstOrDefault().ChildAttributes("href").FirstOrDefault().Value);
-                    product.Title = divProduct.Descendants("img").FirstOrDefault().ChildAttributes("title").FirstOrDefault().Value.Replace("&quot;","'");
+                    product.Title = divProduct.Descendants("img").FirstOrDefault().ChildAttributes("title").FirstOrDefault().Value.Replace("&quot;", "'");
                     product.imageUrl = divProduct.Descendants("img").FirstOrDefault().ChildAttributes("src").FirstOrDefault().Value;
 
                     GetPriceProduct(divProduct, product);
@@ -66,14 +66,14 @@ namespace Bot.Zoom.Services
 
         private static void GetPriceProduct(HtmlNode products, Product product)
         {
-            string uslessCoin = "R$";
+            string uselessCoin = "R$";
             var divCardInfo = products.Descendants("div")
                    .Where(node => node.GetAttributeValue("class", "").Equals("cardInfo")).ToList();
 
             foreach (var priceProduct in divCardInfo)
             {
                 product.DescriptionPrice = priceProduct.Descendants("span").Where(node => node.GetAttributeValue("class", "").Equals("customValue"))?.FirstOrDefault()?.InnerText;
-                product.Price = Convert.ToDecimal(product.DescriptionPrice.Substring(uslessCoin.Length));
+                product.Price = product.DescriptionPrice == null? 0.00M : Convert.ToDecimal(product.DescriptionPrice.Substring(uselessCoin.Length));
             }
         }
     }

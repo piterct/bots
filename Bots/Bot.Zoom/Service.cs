@@ -58,7 +58,7 @@ namespace Bot.Zoom
                 new LogJobErrorModel
                 {
                     Message = ex.Message,
-                    Area = "Execute Customer",
+                    Area = "Execute Bot",
                     Date = DateTime.Now,
                     TypeException = ex.GetType().Name,
                     StackTrace = ex.StackTrace
