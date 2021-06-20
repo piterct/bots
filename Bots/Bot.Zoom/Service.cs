@@ -24,6 +24,8 @@ namespace Bot.Zoom
         public Task StartAsync(CancellationToken cancellationToken)
         {
 
+            ExecuteBot();
+          
            // _timer = new Timer(
            //(e) => ExecuteCustomer(),
            //null,

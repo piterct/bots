@@ -1,6 +1,7 @@
 ﻿using Bot.Zoom.Models;
 using Bot.Zoom.Services;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using System;
@@ -8,12 +9,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Bot.Zoom
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
             var isService = !(Debugger.IsAttached || args.Contains("--console"));
             var config = LoadConfiguration();
@@ -21,10 +23,20 @@ namespace Bot.Zoom
             var builder = new HostBuilder()
                .ConfigureServices((hostContext, services) =>
                {
+                   services.AddHostedService<Service>();
                    // services.AddSingleton<IJobConfiguration, JobConfiguration>();
 
                });
-           
+
+            if (isService)
+            {
+                await builder.RunAsServiceAsync();
+            }
+            else
+            {
+                await builder.RunConsoleAsync();
+            }
+
         }
 
         public static IConfiguration LoadConfiguration()
