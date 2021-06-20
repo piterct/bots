@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 
@@ -14,6 +15,9 @@ namespace Bot.Zoom
     {
         private static void Main(string[] args)
         {
+            var isService = !(Debugger.IsAttached || args.Contains("--console"));
+            var config = LoadConfiguration();
+
             var builder = new HostBuilder()
                .ConfigureServices((hostContext, services) =>
                {
