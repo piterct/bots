@@ -1,5 +1,6 @@
 ﻿using Bot.Zoom.Interfaces;
 using Bot.Zoom.Models;
+using Bot.Zoom.Repositories;
 using Bot.Zoom.Services;
 using Bot.Zoom.Settings;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +29,7 @@ namespace Bot.Zoom
                    services.AddHostedService<Service>();
                    services.AddSingleton(config);
                    services.AddSingleton<IBotZoomSettings, BotZoomSettings>();
+                   services.AddSingleton<IProductRepository, ProductRepository>();
 
                });
 
