@@ -15,21 +15,9 @@ namespace Bot.Zoom.Services
         public async static ValueTask<List<Product>> GetProduct(string productName)
         {
             string rooUrl = "https://www.zoom.com.br";
-            string searchUrl = @"/search?q=" + productName + "";
-            string url = string.Format("{0}{1}", rooUrl, searchUrl);
-            string markup;
             List<Product> products = new List<Product>();
 
-
-            using (WebClient client = new WebClient())
-            {
-                markup = client.DownloadString(url);
-            }
-
-            HtmlDocument html = new HtmlDocument();
-            html.LoadHtml(markup);
-
-
+            var html = await GetHtmlWebSite(rooUrl, productName);
 
 
             var divs = html.DocumentNode.Descendants("div")
@@ -64,6 +52,23 @@ namespace Bot.Zoom.Services
             return await Task.FromResult(products);
         }
 
+        public async static ValueTask<HtmlDocument> GetHtmlWebSite(string url, string productName)
+        {
+            string searchUrl = @"/search?q=" + productName + "";
+            string completeUrl = string.Format("{0}{1}", url, searchUrl);
+            string markup;
+           
+            using (WebClient client = new WebClient())
+            {
+                markup = client.DownloadString(completeUrl);
+            }
+
+            HtmlDocument html = new HtmlDocument();
+            html.LoadHtml(markup);
+
+            return await Task.FromResult(html);
+        }
+
         private static void GetPriceProduct(HtmlNode products, Product product)
         {
             string uselessCoin = "R$";
@@ -73,7 +78,7 @@ namespace Bot.Zoom.Services
             foreach (var priceProduct in divCardInfo)
             {
                 product.DescriptionPrice = priceProduct.Descendants("span").Where(node => node.GetAttributeValue("class", "").Equals("customValue"))?.FirstOrDefault()?.InnerText;
-                product.Price = product.DescriptionPrice == null? 0.00M : Convert.ToDecimal(product.DescriptionPrice.Substring(uselessCoin.Length));
+                product.Price = product.DescriptionPrice == null ? 0.00M : Convert.ToDecimal(product.DescriptionPrice.Substring(uselessCoin.Length));
             }
         }
     }
