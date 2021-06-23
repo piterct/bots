@@ -49,7 +49,13 @@ namespace Bot.Zoom
                 products = products.OrderByDescending(x => x.Price).ToList();
                 await _productRepository.InsertProducts(products);
 
-                Console.WriteLine(string.Format("{0} {1}", products.Count, "produts were found"));
+                if (products.Count == 1)
+                    Console.WriteLine(string.Format("{0} {1}", products.Count, "product was found"));
+                else
+                {
+                    Console.WriteLine(string.Format("{0} {1}", products.Count, "produts were found"));
+                }
+
                 Console.WriteLine(string.Format("{0} {1}", "The cheapest product costs BRL", products.OrderBy(x => x.Price).FirstOrDefault().Price));
                 Console.WriteLine(string.Format("{0} {1}", "The more expensive product costs BRL", products.OrderByDescending(x => x.Price).FirstOrDefault().Price));
 
