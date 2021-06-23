@@ -77,7 +77,8 @@ namespace Bot.Zoom.Services
 
             foreach (var priceProduct in divCardInfo)
             {
-                product.DescriptionPrice = priceProduct.Descendants("span").Where(node => node.GetAttributeValue("class", "").Equals("customValue"))?.FirstOrDefault()?.InnerText;
+                product.DescriptionPrice = priceProduct.Descendants("span").Where(node => node.GetAttributeValue("class", "").Equals("customValue"))?.FirstOrDefault()?.InnerText == null ? "Product Unavailable"
+                    : priceProduct.Descendants("span").Where(node => node.GetAttributeValue("class", "").Equals("customValue"))?.FirstOrDefault()?.InnerText;
                 product.Price = product.DescriptionPrice == null ? 0.00M : Convert.ToDecimal(product.DescriptionPrice.Substring(uselessCoin.Length));
             }
         }
