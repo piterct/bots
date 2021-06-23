@@ -24,9 +24,8 @@ namespace Bot.Zoom.Repositories
                 foreach (var product in products)
                 {
 
-                    rows = await connection.ExecuteAsync("INSERT INTO Tabela(Name, Cpf, Password, Email, Mobile, IsEnabled, UserTypeId, CreatedAt) " +
-                                                         "VALUES(@CompanyDocument, @ClientDocument, @ClientName, @ClientEmail, @ClientPhone, @CreatedAt, @Message )",
-                           new { ticket.CompanyDocument, ticket.ClientDocument, ticket.ClientName, ticket.ClientEmail, ticket.ClientPhone, ticket.CreatedAt, ticket.Message }, transaction);
+                    rows = await connection.ExecuteAsync(@"INSERT INTO Product VALUES (@Title, @NameProductSearch, @ImageUrl, @UrlProductWebSite, @DescriptionPrice, @Price)",
+                           new { product.Title, product.NameProductSearch, product.ImageUrl, product.UrlProductWebSite, product.DescriptionPrice, product.Price });
                 }
 
             }
