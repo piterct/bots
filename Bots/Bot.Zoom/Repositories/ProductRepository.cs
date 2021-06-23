@@ -1,6 +1,7 @@
 ﻿using Bot.Zoom.Interfaces;
 using Bot.Zoom.Models;
 using Dapper;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
@@ -24,14 +25,22 @@ namespace Bot.Zoom.Repositories
                 foreach (var product in products)
                 {
 
-                    rows = await connection.ExecuteAsync(@"INSERT INTO Product VALUES (@Title, @NameProductSearch, @ImageUrl, @UrlProductWebSite, @DescriptionPrice, @Price)",
-                           new { product.Title, product.NameProductSearch, product.ImageUrl, product.UrlProductWebSite, product.DescriptionPrice, product.Price });
+                    rows = await connection.ExecuteAsync(@"INSERT INTO Product VALUES (@Id, @Title, @NameProductSearch, @ImageUrl, @UrlProductWebSite, @DescriptionPrice, @Price, @RegistryDate)",
+                           new
+                           {
+                               Id = Guid.NewGuid(),
+                               Title = product.Title,
+                               NameProductSearch = product.NameProductSearch,
+                               ImageUrl = product.ImageUrl,
+                               UrlProductWebSite = product.UrlProductWebSite,
+                               DescriptionPrice = product.DescriptionPrice,
+                               Price = product.Price,
+                               RegistryDate = DateTime.Now
+                           });
                 }
 
+                return rows > 0;
             }
-
-
-            return rows > 0;
         }
     }
 }

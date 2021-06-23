@@ -1,4 +1,5 @@
-﻿using Bot.Zoom.Models;
+﻿using Bot.Zoom.Interfaces;
+using Bot.Zoom.Models;
 using Bot.Zoom.Models.LogsModel;
 using Bot.Zoom.Services;
 using Microsoft.Extensions.Hosting;
@@ -13,24 +14,24 @@ namespace Bot.Zoom
 {
     public class Service : IHostedService, IDisposable
     {
-      
+        private readonly IProductRepository _productRepository;
         private Timer _timer;
 
-        public Service()
+        public Service(IProductRepository productRepository)
         {
-           
+            _productRepository = productRepository;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
 
             ExecuteBot();
-          
-           // _timer = new Timer(
-           //(e) => ExecuteCustomer(),
-           //null,
-           //TimeSpan.Zero,
-           //TimeSpan.FromMinutes(Convert.ToDouble(_jobConfiguration.ExecuteInterval)));
+
+            // _timer = new Timer(
+            //(e) => ExecuteCustomer(),
+            //null,
+            //TimeSpan.Zero,
+            //TimeSpan.FromMinutes(Convert.ToDouble(_jobConfiguration.ExecuteInterval)));
 
             return Task.CompletedTask;
 
@@ -48,6 +49,8 @@ namespace Bot.Zoom
                 List<Product> products = ZoonmProductService.GetProduct(productEncode).Result;
 
                 products = products.OrderByDescending(x => x.Price).ToList();
+
+                await _productRepository.InsertProducts(products);
 
                 Console.ReadKey();
             }
