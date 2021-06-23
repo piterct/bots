@@ -1,5 +1,5 @@
 ﻿using Bot.Zoom.Models;
-using Bot.Zoom.Models.Logs;
+using Bot.Zoom.Models.LogsModel;
 using Bot.Zoom.Services;
 using Microsoft.Extensions.Hosting;
 using System;
