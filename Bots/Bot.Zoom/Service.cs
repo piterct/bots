@@ -44,9 +44,9 @@ namespace Bot.Zoom
                 Console.WriteLine("Name product to search: ");
                 string nameProduct = Console.ReadLine();
 
-                string productEncode = Uri.EscapeUriString(nameProduct);
+               
 
-                List<Product> products = ZoonmProductService.GetProduct(productEncode).Result;
+                List<Product> products = ZoonmProductService.GetProduct(nameProduct).Result;
 
                 products = products.OrderByDescending(x => x.Price).ToList();
 

@@ -1,11 +1,9 @@
 ﻿using Bot.Zoom.Models;
 using HtmlAgilityPack;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Bot.Zoom.Services
@@ -17,7 +15,9 @@ namespace Bot.Zoom.Services
             string rooUrl = "https://www.zoom.com.br";
             List<Product> products = new List<Product>();
 
-            var html = await GetHtmlWebSite(rooUrl, productName);
+            string productEncode = Uri.EscapeUriString(productName);
+
+            var html = await GetHtmlWebSite(rooUrl, productEncode);
 
 
             var divs = html.DocumentNode.Descendants("div")
@@ -57,7 +57,7 @@ namespace Bot.Zoom.Services
             string searchUrl = @"/search?q=" + productName + "";
             string completeUrl = string.Format("{0}{1}", url, searchUrl);
             string markup;
-           
+
             using (WebClient client = new WebClient())
             {
                 markup = client.DownloadString(completeUrl);
