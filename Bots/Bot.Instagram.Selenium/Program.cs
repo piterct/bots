@@ -11,7 +11,20 @@ namespace Bot.Instagram.Selenium
         {
             IWebDriver webDriver = WebDriverFactory.CreateWebDriver(Browser.Chrome, @"D:\Meus Documentos\Documentos\Repositorios\bots\Bots\Driver");
 
-            webDriver.LoadPage(TimeSpan.FromSeconds(10), "https://www.google.com.br");
+
+            try
+            {
+                webDriver.LoadPage(TimeSpan.FromSeconds(5), "https://www.instagram.com");
+                webDriver.WaitFindElement(By.Name("username"));
+                webDriver.SetText(By.Name("username"), "michael");
+                webDriver.SetText(By.Name("password"), "mypassword");
+                webDriver.Submit(By.TagName("button"));
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
 
             Console.ReadKey();
         }
