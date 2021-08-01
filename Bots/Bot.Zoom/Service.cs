@@ -78,7 +78,7 @@ namespace Bot.Zoom
 
             finally
             {
-                new LogJobModel { Message = "Bot Finished", Area = "Execute Bot", Date = DateTime.Now };
+                new LogJobModel { Message = "Bot Finished", Area = "ExecuteBot", Date = DateTime.Now };
             }
 
         }
