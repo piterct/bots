@@ -1,4 +1,7 @@
-﻿using System;
+﻿using OpenQA.Selenium;
+using prmToolkit.Selenium;
+using prmToolkit.Selenium.Enum;
+using System;
 
 namespace Bot.Instagram.Selenium
 {
@@ -6,7 +9,9 @@ namespace Bot.Instagram.Selenium
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            IWebDriver webDriver = WebDriverFactory.CreateWebDriver(Browser.Chrome, @"D:\Meus Documentos\Documentos\Repositorios\bots\Bots\Driver");
+
+            webDriver.LoadPage(TimeSpan.FromSeconds(10), "https://www.google.com.br");
 
             Console.ReadKey();
         }
