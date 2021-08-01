@@ -2,6 +2,7 @@
 using prmToolkit.Selenium;
 using prmToolkit.Selenium.Enum;
 using System;
+using System.Threading;
 
 namespace Bot.Instagram.Selenium
 {
@@ -19,6 +20,8 @@ namespace Bot.Instagram.Selenium
                 webDriver.SetText(By.Name("username"), "michael");
                 webDriver.SetText(By.Name("password"), "mypassword");
                 webDriver.Submit(By.TagName("button"));
+
+                Thread.Sleep(TimeSpan.FromSeconds(3));
 
             }
             catch (Exception ex)
