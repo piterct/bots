@@ -2,6 +2,7 @@
 using prmToolkit.Selenium;
 using prmToolkit.Selenium.Enum;
 using System;
+using System.Configuration;
 using System.Threading;
 
 namespace Bot.Instagram.Selenium
@@ -12,12 +13,14 @@ namespace Bot.Instagram.Selenium
         {
             IWebDriver webDriver = WebDriverFactory.CreateWebDriver(Browser.Chrome, @"D:\Meus Documentos\Documentos\Repositorios\bots\Bots\Driver");
 
+            string userName = ConfigurationManager.AppSettings["UserName"];
+
 
             try
             {
                 webDriver.LoadPage(TimeSpan.FromSeconds(5), "https://www.instagram.com");
                 webDriver.WaitFindElement(By.Name("username"));
-                webDriver.SetText(By.Name("username"), "michael");
+                webDriver.SetText(By.Name("username"), userName);
                 webDriver.SetText(By.Name("password"), "mypassword");
                 webDriver.Submit(By.TagName("button"));
 
