@@ -14,6 +14,7 @@ namespace Bot.Instagram.Selenium
             IWebDriver webDriver = WebDriverFactory.CreateWebDriver(Browser.Chrome, @"D:\Meus Documentos\Documentos\Repositorios\bots\Bots\Driver");
 
             string userName = ConfigurationManager.AppSettings["UserName"];
+            string passWord = ConfigurationManager.AppSettings["Password"];
 
 
             try
@@ -21,7 +22,7 @@ namespace Bot.Instagram.Selenium
                 webDriver.LoadPage(TimeSpan.FromSeconds(5), "https://www.instagram.com");
                 webDriver.WaitFindElement(By.Name("username"));
                 webDriver.SetText(By.Name("username"), userName);
-                webDriver.SetText(By.Name("password"), "mypassword");
+                webDriver.SetText(By.Name("password"), passWord);
                 webDriver.Submit(By.TagName("button"));
 
                 Thread.Sleep(TimeSpan.FromSeconds(3));
