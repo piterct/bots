@@ -27,6 +27,10 @@ namespace Bot.Instagram.Selenium
 
                 Thread.Sleep(TimeSpan.FromSeconds(3));
 
+                webDriver.LoadPage(TimeSpan.FromSeconds(10), "https://www.instagram.com/microsoft/");
+
+                webDriver.FindElement(By.XPath("//button[contains(text(), 'Seguir')]")).Click();
+
             }
             catch (Exception ex)
             {
