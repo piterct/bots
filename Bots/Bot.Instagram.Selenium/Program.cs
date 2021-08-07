@@ -36,6 +36,12 @@ namespace Bot.Instagram.Selenium
             {
                 Console.WriteLine(ex.ToString());
             }
+            finally
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(5));
+                 webDriver.Close();
+                 webDriver.Dispose();
+            }
 
             Console.ReadKey();
         }
