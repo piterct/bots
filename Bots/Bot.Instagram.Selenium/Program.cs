@@ -32,6 +32,11 @@ namespace Bot.Instagram.Selenium
                 webDriver.FindElement(By.XPath("//button[contains(text(), 'Seguir')]")).Click();
 
             }
+
+            catch (NoSuchElementException)
+            {
+                Console.WriteLine("Already Following");
+            }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
@@ -39,8 +44,9 @@ namespace Bot.Instagram.Selenium
             finally
             {
                 Thread.Sleep(TimeSpan.FromSeconds(5));
-                 webDriver.Close();
-                 webDriver.Dispose();
+                webDriver.Close();
+                webDriver.Dispose();
+                Environment.Exit(-1);
             }
 
             Console.ReadKey();
